@@ -1,0 +1,23 @@
+import org.junit.After;
+import org.junit.Before;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+/**
+ * Created by krish on 22/10/2014.
+ */
+public class BaseTest extends BasePage {
+    @Before
+    public void stratpage() {
+        driver = new FirefoxDriver();
+
+        driver.get("http://demo.nopcommerce.com");
+        driver.manage().window().maximize();
+
+    }
+    @After
+    public void stoppage() {
+
+        driver.quit();
+    }
+
+}
