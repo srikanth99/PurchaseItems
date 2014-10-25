@@ -1,0 +1,77 @@
+import org.junit.Assert;
+import org.junit.Test;
+
+/**
+ * Created by roopakrish on 22/10/2014.
+ */
+public class POMsmokeTestSuiteforNOP1 extends BaseTest{
+
+    AbstractPage abpage = new AbstractPage();
+    BookPage book = new BookPage();
+    ComputerPage computer = new ComputerPage();
+    GiftCardPage giftcard = new GiftCardPage();
+    ShoppingCartPage Shoppingcart = new ShoppingCartPage();
+    CheckoutPage checkout = new CheckoutPage();
+    MyaccountPage orders = new MyaccountPage();
+
+
+    @Test
+
+    public void PurchaseOnline() throws InterruptedException{
+
+
+       //abpage.registration("Rkvs", "kris", "rkvs1@yahoo.com", "kris123");
+        abpage.login("rkvs1@yahoo.com", "kris123");
+
+        book.GotoSelectbookpage("Cooking for Two");
+        abpage.AdditemtoCart("addtocart_22_EnteredQuantity","5", "add-to-cart-button-22");
+        Assert.assertTrue(abpage.isitemaddedtocart());
+
+        computer.GotopurchaseNotebook();
+        abpage.AdditemtoCart("addtocart_31_EnteredQuantity", "1", "add-to-cart-button-31");
+        Assert.assertTrue(abpage.isitemaddedtocart());
+        Utils.Waitforsometime();
+
+        giftcard.GiftCardPurchase();
+        Assert.assertTrue(abpage.isitemaddedtocart());
+
+        Shoppingcart.UpdateShoppingCart("2");
+        Utils.Waitforsometime();
+
+        Shoppingcart.EstimateShipping("Canada");
+        Utils.Waitforsometime();
+        Assert.assertTrue(abpage.isShippingoptionshown());
+        Utils.Waitforsometime();
+
+
+        Shoppingcart.Gotocheckout();
+        Assert.assertTrue(abpage.isCheckoutshown());
+
+        checkout.GotoBillingAddress();
+        Assert.assertTrue(abpage.isShippingpage());
+        Utils.Waitforsometime();
+
+        checkout.GotoShippingtoAddress();
+        Assert.assertTrue(abpage.isShippingmethodpage());
+        Utils.Waitforsometime();
+
+
+        checkout.GotoShippingMethod();
+        Utils.Waitforsometime();
+
+        checkout.GotoPaymentMethod();
+        Utils.Waitforsometime();
+        Assert.assertTrue(abpage.isOrderconfirmed());
+        Utils.Waitforsometime();
+        System.out.println("Hurray your Test case is Passed");
+        Utils.Waitforsometime();
+        //to veryfy my order
+        orders.Myorders();
+        //Assertion is inside the method Myorders
+        Utils.Waitforsometime();
+        System.out.println("Your Order is veryfied");
+
+        abpage.logout();
+
+    }
+}
