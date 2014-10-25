@@ -4,15 +4,16 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by krish on 22/10/2014.
+ *
  */
 public class CheckoutPage extends BasePage{
 
     Utils util = new Utils();
     // Goto Billing Address
     public void GotoBillingAddress(){
-
+//uploading
         //util.SelectFromDropdown("billing-address-select","New Address" );
-
+//uploading
 
         util.SelectFromDropdown("BillingNewAddress_CountryId","Canada" );
 
